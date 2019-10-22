@@ -1,0 +1,126 @@
+
+// 格式化小数
+function toFix(val, num) {
+    return parseFloat(val).toFixed(num);
+}
+
+// 姓名用'/'拼接
+function names(names) {
+    var str = '';
+    for (var i = 0; i < names.length; i++) {
+        if (i === names.length - 1) {
+            str += names[i].name
+        } else {
+            str += names[i].name + ' / '
+        }
+    }
+    return str;
+}
+
+// 格式化观影人数
+function watchNum(num) {
+    if (num < 10000) {
+        return num;
+    }
+    if (num < 100000000) {
+        return toFix(num / 10000, 1) + '万'
+    }else{
+        return toFix(num / 100000000, 1) + '亿'
+    }
+}
+
+// 返回整星循环次数的数组
+function integer(num) {
+    var len = parseInt(parseInt(num) / 2);
+    var arr = [];
+    for(var i = 0; i< len; i++){
+        arr.push(i);
+    }
+    return arr;
+}
+
+// 返回剩余星循环次数的数组
+function decimals(num) {
+    var len = 5 - parseInt(parseInt(num) / 2);
+    var arr = [];
+    for (var i = 0; i < len; i++) {
+        arr.push(i);
+    }
+    return arr;
+}
+
+// 返回评论星循环次数
+function commentNum (num) {
+    var arr = [];
+    for (var i = 0; i < num; i++) {
+        arr.push(i);
+    }
+    return arr;
+}
+
+// 返回评论剩余星循环次数
+function commentUnNum(num) {
+    var arr = [];
+    for (var i = 0; i < 5-num; i++) {
+        arr.push(i);
+    }
+    return arr;
+}
+
+// 格式化电影信息（年份/上映地点/类型）
+function movieInfo(countries = [], genres = []) {
+    return ' / ' + countries.concat(genres).join(' / ');
+}
+
+// 格式化剧情简介（展开/收起）
+function dramaContent(content = '', isShowAll = false) {
+    if (isShowAll) {
+        return content;
+    } else {
+        if (content.length <= 85){
+            return content;
+        }
+        return content.substring(0, 85) + '...';
+    }
+}
+
+// 热门图标
+function selectIcon(index) {
+    switch (index){
+        case 0: 
+            return '/pages/images/i_first.png';
+        case 1:
+            return '/pages/images/i_second.png';
+        case 2:
+            return '/pages/images/i_thirdly.png';
+    }
+}
+
+// 排行数字
+function rankingNumStyle(index) {
+    switch (index) {
+        case 0:
+            return 'number one';
+        case 1:
+            return 'number two';
+        case 2:
+            return 'number three';
+        default:
+            return 'number';
+    }
+}
+
+// 导出模块
+module.exports = {
+    toFix: toFix,
+    names: names,
+    watchNum: watchNum,
+    integer: integer,
+    decimals: decimals,
+    movieInfo: movieInfo,
+    dramaContent: dramaContent,
+    commentNum: commentNum,
+    commentUnNum: commentUnNum,
+    selectIcon: selectIcon,
+    rankingNumStyle: rankingNumStyle
+};
